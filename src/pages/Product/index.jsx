@@ -1,7 +1,13 @@
 import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { useState } from 'react';
+import ProductCreateDialog from '../../components/Product/ProductCreateDialog';
 
-const Products = () => {
+const Product = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box
       sx={{
@@ -18,17 +24,18 @@ const Products = () => {
       <Box
         sx={{
           height: '4rem',
-          pl: "1rem",
+          pl: '1rem',
           display: 'flex',
-          gap:'1rem',
-          alignItems:"center"
+          gap: '1rem',
+          alignItems: 'center',
         }}
       >
-        <Typography variant='h4' sx={{ height: '100%', display: 'flex', alignItems: 'flex-end', width:"11rem"}}>
+        <Typography variant='h4' sx={{ height: '100%', display: 'flex', alignItems: 'flex-end', width: '11rem' }}>
           Productos
         </Typography>
         <Button
-          variant="contained"
+          onClick={handleOpen}
+          variant='contained'
           startIcon={<AddIcon />}
           sx={{
             height: '70%',
@@ -36,13 +43,16 @@ const Products = () => {
         >
           NUEVO
         </Button>
+        {open && <ProductCreateDialog open={open} handleClose={handleClose} />}
       </Box>
       <Box
         sx={{
-          flexGrow:1
+          flexGrow: 1,
         }}
-      >productos</Box>
+      >
+        productos
+      </Box>
     </Box>
   );
 };
-export default Products;
+export default Product;

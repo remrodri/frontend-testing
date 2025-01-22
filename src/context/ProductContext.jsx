@@ -9,7 +9,13 @@ export const ProductProvider = ({ children }) => {
   const createProduct = async (productData) => {
     // console.log('productData::: ', productData);
     const response = await createProductRequest(productData);
+    if (!response) {
+      console.log('El producto no se regitro');
+    }
+    setProducts([...products, response]);
+    console.log('response::: ', response);
   };
+
   const fetchProducts = async () => {
     try {
       const productList = await getAllProductsRequest();

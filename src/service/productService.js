@@ -5,7 +5,7 @@ export const createProductRequest = async (productData) => {
   try {
     const reponse = await axiosInstance.post('/products', productData);
     console.log('reponse::: ', reponse);
-    // return reponse.data;
+    return reponse.data.data;
   } catch (error) {
     console.error('Error creando el producto', error);
     throw error;

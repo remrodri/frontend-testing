@@ -2,6 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import ProductCreateDialog from '../../components/Product/ProductCreateDialog';
+import ProductShowcaseContainer from '../../components/Product/ProductShowcase';
 
 const Product = () => {
   const [open, setOpen] = useState(false);
@@ -48,9 +49,11 @@ const Product = () => {
       <Box
         sx={{
           flexGrow: 1,
+          overflowY: 'auto',
+          p: '1rem',
         }}
       >
-        productos
+        <ProductShowcaseContainer />
       </Box>
     </Box>
   );

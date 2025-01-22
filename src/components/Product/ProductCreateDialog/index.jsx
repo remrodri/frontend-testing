@@ -10,6 +10,7 @@ const ProductCreateDialog = ({ open, handleClose }) => {
     // console.log('productData::: ', productData);
     try {
       const response = await createProduct(productData);
+      handleClose();
     } catch (error) {
       console.error('Error creating product:', error);
     }

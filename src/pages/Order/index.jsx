@@ -36,11 +36,12 @@ const Order = () => {
   return (
     <Box
       sx={{
+        p: { xs: '3.5rem 0 0 0', sm: '4rem 0 0 0' },
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        minHeight: '100vh',
+        height: '100vh',
         backgroundColor: '#f4f4f4',
       }}
     >
@@ -62,9 +63,6 @@ const Order = () => {
             selectedOrder={selectedOrder}
           />
         )}
-        <Button variant='contained' color='primary' onClick={handleOpen}>
-          Create New Product
-        </Button>
       </Box>
     </Box>
   );

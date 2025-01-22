@@ -45,17 +45,27 @@ const Order = () => {
       }}
     >
       <OrderTable data={orders} handleSelectOrder={handleSelectOrder} />
-      <Button variant='contained' color='primary' onClick={handleOpen}>
-        Create New Order
-      </Button>
-      {open && (
-        <OrderCreateDialog
-          open={open}
-          handleClose={handleClose}
-          handleSubmit={handleFormSubmit}
-          selectedOrder={selectedOrder}
-        />
-      )}
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 2,
+        }}
+      >
+        <Button variant='contained' color='primary' onClick={handleOpen}>
+          Create New Order
+        </Button>
+        {open && (
+          <OrderCreateDialog
+            open={open}
+            handleClose={handleClose}
+            handleSubmit={handleFormSubmit}
+            selectedOrder={selectedOrder}
+          />
+        )}
+        <Button variant='contained' color='primary' onClick={handleOpen}>
+          Create New Product
+        </Button>
+      </Box>
     </Box>
   );
 };

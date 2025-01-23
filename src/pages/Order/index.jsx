@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Button } from '@mui/material';
-import OrderTable from '../../components/OrderTable';
-import OrderCreateDialog from '../../components/OrderCreateDialog';
+import { Box, Button, Typography } from '@mui/material';
+import OrderTable from '../../components/Order/OrderTable';
+import OrderCreateDialog from '../../components/Order/OrderCreateDialog';
 import { data as ordersData } from '../../utils/order';
 import { data as products } from '../../utils/product';
+import AddIcon from '@mui/icons-material/Add';
 
 const Order = () => {
   const [open, setOpen] = useState(false);
@@ -36,17 +37,55 @@ const Order = () => {
   return (
     <Box
       sx={{
-        p: { xs: '3.5rem 0 0 0', sm: '4rem 0 0 0' },
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
+        p: { xs: '3.5rem 0 0 0', sm: '4rem 0 0 0' },
         height: '100vh',
         backgroundColor: '#f4f4f4',
       }}
     >
-      <OrderTable data={orders} handleSelectOrder={handleSelectOrder} />
       <Box
+        sx={{
+          height: '4rem',
+          pl: '1rem',
+          display: 'flex',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant='h4' sx={{ height: '100%', display: 'flex', alignItems: 'flex-end', width: '11rem' }}>
+          Pedidos
+        </Typography>
+        <Button
+          onClick={handleOpen}
+          variant='contained'
+          startIcon={<AddIcon />}
+          sx={{
+            height: '70%',
+            width: '12rem',
+          }}
+        >
+          nuevo pedido
+        </Button>
+        {open && (
+          <OrderCreateDialog
+            open={open}
+            handleClose={handleClose}
+            handleSubmit={handleFormSubmit}
+            selectedOrder={selectedOrder}
+          />
+        )}
+      </Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          overflowY: 'auto',
+          p: '1rem',
+        }}
+      >
+        <OrderTable data={orders} handleSelectOrder={handleSelectOrder} />
+      </Box>
+      {/* <Box
         sx={{
           display: 'flex',
           gap: 2,
@@ -63,7 +102,7 @@ const Order = () => {
             selectedOrder={selectedOrder}
           />
         )}
-      </Box>
+      </Box> */}
     </Box>
   );
 };

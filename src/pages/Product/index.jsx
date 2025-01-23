@@ -12,11 +12,8 @@ const Product = () => {
   return (
     <Box
       sx={{
-        // flexGrow: 1,
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         p: { xs: '3.5rem 0 0 0', sm: '4rem 0 0 0' },
         height: '100vh',
         backgroundColor: '#f4f4f4',
@@ -40,9 +37,10 @@ const Product = () => {
           startIcon={<AddIcon />}
           sx={{
             height: '70%',
+            width: '12rem',
           }}
         >
-          NUEVO
+          nuevo producto
         </Button>
         {open && <ProductCreateDialog open={open} handleClose={handleClose} />}
       </Box>

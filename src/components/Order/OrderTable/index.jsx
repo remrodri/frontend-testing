@@ -15,10 +15,10 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const OrderTable = ({ data, handleSelectOrder }) => {
   return (
-    <Box sx={{ width: '80%', maxWidth: '1200px' }}>
-      <Typography variant='h4' align='center' gutterBottom>
+    <Box sx={{ width: '100%', maxWidth: '1200px' }}>
+      {/* <Typography variant='h4' align='center' gutterBottom>
         Pedidos
-      </Typography>
+      </Typography> */}
       <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
         <Table>
           <TableHead>

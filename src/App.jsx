@@ -4,13 +4,16 @@ import { CssBaseline } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import { AppRouter } from './router/AppRouter';
 import { ProductProvider } from './context/ProductContext';
+import { OrderProvider } from './context/OrderContext';
 
 function App() {
   return (
-    <ProductProvider>
-      <CssBaseline />
-      <RouterProvider router={AppRouter} />
-    </ProductProvider>
+    <OrderProvider>
+      <ProductProvider>
+        <CssBaseline />
+        <RouterProvider router={AppRouter} />
+      </ProductProvider>
+    </OrderProvider>
   );
 }
 

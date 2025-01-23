@@ -12,7 +12,7 @@ import {
   TextField,
 } from '@mui/material';
 
-const NewOrderDialog = ({ open, handleClose, formik, products }) => {
+const NewOrderDialog = ({ open, handleClose, formik, products, isEditing }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Create Order</DialogTitle>
@@ -22,7 +22,7 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
             display: 'flex',
             flexDirection: 'column',
             pt: '0.5rem',
-            width: '15rem',
+            width: '17rem',
           }}
         >
           <form onSubmit={formik.handleSubmit}>
@@ -33,8 +33,8 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
               sx={{ height: '70px' }}
               error={formik.touched.productId && Boolean(formik.errors.productId)}
             >
-              <InputLabel>Product</InputLabel>
-              <Select label='Product' name='productId' value={formik.values.productId} onChange={formik.handleChange}>
+              <InputLabel>Producto</InputLabel>
+              <Select label='Producto' name='productId' value={formik.values.productId} onChange={formik.handleChange}>
                 {products.map((product) => (
                   <MenuItem key={product.id} value={product.id}>
                     {product.name}
@@ -50,20 +50,20 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
               size='small'
               fullWidth
               id='units'
-              label='units'
+              label='unidades'
               variant='outlined'
               type='number'
               value={formik.values.units}
-              onChange={formik.handleChange}
               error={formik.touched.units && Boolean(formik.errors.units)}
               helperText={formik.touched.units && formik.errors.units}
+              onChange={formik.handleChange}
             />
             <TextField
               sx={{ height: '70px' }}
               size='small'
               fullWidth
               id='bonus'
-              label='bonus'
+              label='bonos'
               variant='outlined'
               type='number'
               value={formik.values.bonus}
@@ -76,7 +76,7 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
               size='small'
               fullWidth
               id='promo'
-              label='promo'
+              label='promociones'
               variant='outlined'
               type='number'
               value={formik.values.promo}
@@ -84,12 +84,29 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
               error={formik.touched.promo && Boolean(formik.errors.promo)}
               helperText={formik.touched.promo && formik.errors.promo}
             />
+            {/* {['units', 'bonus', 'promo'].map((field) => (
+              <TextField
+                key={field}
+                sx={{ height: '70px' }}
+                size='small'
+                fullWidth
+                id={field}
+                label={field === 'units' ? 'Unidades' : field === 'bonus' ? 'Bonos' : 'Promociones'}
+                variant='outlined'
+                type='number'
+                value={formik.values[field]}
+                onChange={(e) => formik.setFieldValue(field, Number(e.target.value))}
+                error={formik.touched[field] && Boolean(formik.errors[field])}
+                helperText={formik.touched[field] && formik.errors[field]}
+                // inputProps={{ min: 0 }} // Evita valores negativos
+              />
+            ))} */}
             <TextField
               sx={{ height: '70px' }}
               size='small'
               fullWidth
               id='totalPrice'
-              label='totalPrice'
+              label='Precio Total'
               variant='outlined'
               type='number'
               value={formik.values.totalPrice}
@@ -104,7 +121,7 @@ const NewOrderDialog = ({ open, handleClose, formik, products }) => {
               }}
             >
               <Button color='success' variant='contained' type='submit'>
-                Registrar
+                {isEditing ? 'Actualizar' : 'Registrar'}
               </Button>
               <Button color='error' variant='contained' onClick={handleClose}>
                 Cancelar

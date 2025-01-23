@@ -1,58 +1,42 @@
-import React from 'react';
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Typography,
-  IconButton,
-} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { useEffect, useState } from 'react';
+import { useOrderContext } from '../../../context/OrderContext';
+import { useProductContext } from '../../../context/ProductContext';
+import OrderTable from './OrderTable';
 
-const OrderTable = ({ data, handleSelectOrder }) => {
+const OrderTableContainer = ({ handleOpen }) => {
+  const { products } = useProductContext();
+  const { orders } = useOrderContext();
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const getProductName = (productId) => {
+    const product = products.find((product) => product.id === productId);
+    return product ? product.name : 'Desconocido';
+  };
+
+  const handleSelectOrder = (order) => {
+    setSelectedOrder(order);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedOrder(null);
+  };
+
   return (
-    <Box sx={{ width: '100%', maxWidth: '1200px' }}>
-      {/* <Typography variant='h4' align='center' gutterBottom>
-        Pedidos
-      </Typography> */}
-      <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Product</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Units</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Bonus</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Promo</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Total Price</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{`${item.product.id} - ${item.product.name}`}</TableCell>
-                <TableCell>{item.units}</TableCell>
-                <TableCell>{item.bonus}</TableCell>
-                <TableCell>{item.promo}</TableCell>
-                <TableCell>{item.totalPrice}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleSelectOrder(item)}>
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+    <OrderTable
+      // data={data}
+      orders={orders}
+      // products={products}
+      handleSelectOrder={handleSelectOrder}
+      getProductName={getProductName}
+      // handleOpen={handleOpen}
+      open={open}
+      handleClose={handleClose}
+      selectedOrder={selectedOrder}
+    />
   );
 };
 
-export default OrderTable;
+export default OrderTableContainer;

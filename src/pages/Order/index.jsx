@@ -5,6 +5,7 @@ import OrderCreateDialog from '../../components/Order/OrderCreateDialog';
 import { data as ordersData } from '../../utils/order';
 import { data as products } from '../../utils/product';
 import AddIcon from '@mui/icons-material/Add';
+import OrderTableContainer from '../../components/Order/OrderTable';
 
 const Order = () => {
   const [open, setOpen] = useState(false);
@@ -71,8 +72,8 @@ const Order = () => {
           <OrderCreateDialog
             open={open}
             handleClose={handleClose}
-            handleSubmit={handleFormSubmit}
-            selectedOrder={selectedOrder}
+            // handleSubmit={handleFormSubmit}
+            // selectedOrder={selectedOrder}
           />
         )}
       </Box>
@@ -81,9 +82,17 @@ const Order = () => {
           flexGrow: 1,
           overflowY: 'auto',
           p: '1rem',
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
-        <OrderTable data={orders} handleSelectOrder={handleSelectOrder} />
+        <OrderTableContainer
+          // data={orders}
+          // handleSelectOrder={handleSelectOrder}
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+        />
       </Box>
       {/* <Box
         sx={{
